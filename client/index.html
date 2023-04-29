@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a random fortune</button>
+    <button id="quoteButton">Get an Inspirational Quote</button>
+    <p id="quote"></p>
+    <h2>Goal Tracker</h2>
+    <form id="goalForm">
+      <label for="goal">Goal:</label>
+      <input type="text" id="goal" name="goal" required />
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" name="dueDate" required />
+      <button type="submit">Add Goal</button>
+    </form>
+    <ul id="goalList"></ul>
+    <h2>Daily Affirmation Reminder</h2>
+    <form id="affirmationForm">
+      <label for="affirmation">Affirmation:</label>
+      <input type="text" id="affirmation" name="affirmation" required />
+      <label for="reminderTime">Reminder Time:</label>
+      <input type="time" id="reminderTime" name="reminderTime" required />
+      <button type="submit">Set Reminder</button>
+    </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
