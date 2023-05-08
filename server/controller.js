@@ -1,4 +1,3 @@
-
 const compliments = [
   "Gee, you're a smart cookie!",
   "Cool shirt!",
@@ -77,3 +76,49 @@ function getFortune(req, res) {
 
   res.status(200).send(randomFortune);
 }
+
+// Updating Tracking Progress
+
+const updateProgress = (req, res) => {
+  const { id } = req.params;
+  const { progress } = req.body;
+  const goal = goals.find((g) => g.id === parseInt(id));
+
+  if (!goal) {
+    res.status(404).json({ error: "Goal not found" });
+  } else {
+    goal.progress = progress;
+    res.status(200).json(goal);
+  }
+};
+
+app.put("/api/goals/progress/:id", updateProgress);
+
+// gratitude journal Entries
+let gratitudeEntries = [];
+
+const addGratitudeEntry = (req, res) => {
+  const gratitudeData = {
+    gratitude: req.body.gratitude,
+    date: new Date().toLocaleDateString(),
+  };
+  gratitudeEntries.push(gratitudeData);
+  res.status(201).json(gratitudeData);
+};
+
+app.post("/api/gratitude", addGratitudeEntry);
+
+// delete
+const deleteHabit = (req, res) => {
+  const { id } = req.params;
+
+  let habitIndex = habits.findIndex((habit) => habit.id === parseInt(id));
+  if (habitIndex !== -1) {
+    habits.splice(habitIndex, 1);
+    res.status(200).json({ message: "Habit deleted" });
+  } else {
+    res.status(404).json({ error: "Habit not found" });
+  }
+};
+
+app.delete("/api/habits/:id", deleteHabit);

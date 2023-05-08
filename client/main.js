@@ -104,3 +104,46 @@ goalForm.addEventListener("submit", event => {
          console.error(error);
        });
    });
+
+
+// Progress Tracker
+progressForm.addEventListener("submit", event => {
+  event.preventDefault();
+  axios.put(`http://localhost:4000/api/goals/progress/${goalSelectElement.value}`, { progress: progressInputElement.value })
+    .then(() => {
+      progressInputElement.value = "";
+      fetchGoals();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
+
+// Add gratitude entry event
+gratitudeForm.addEventListener("submit", event => {
+  event.preventDefault();
+  axios.post("http://localhost:4000/api/gratitude", { gratitude: gratitudeInputElement.value })
+    .then(() => {
+      gratitudeInputElement.value = "";
+      fetchGratitudeEntries();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
+
+// Delete habit event
+habitListElement.addEventListener("click", event => {
+  if (event.target.tagName === "BUTTON") {
+    const habitId = event.target.parentElement.getAttribute("data-id");
+    axios.delete(`http://localhost:4000/api/habits/${habitId}`)
+      .then(() => {
+        fetchHabits();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+});
